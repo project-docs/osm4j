@@ -1,0 +1,40 @@
+$:meta(title="Using tags: counting businesses");
+$:markdown
+# Using tags: counting businesses
+
+The three basic data types all implement the
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmEntity)
+interface so that we can access an object's tags by iterating them using a for loop.
+The tags are provided as a list by default to minimize computational overhead
+in situtations where tags are not needed or where the sequential representation suffices.
+For example when converting from one file format to another, or when extracting a subset
+for an area from a bigger dataset, we don't care about the meaning of the tags
+but just pass them to an output stream.
+
+In many situations however, the sequential representation is not very useful.
+Since any object may not have multiple tags with the same key, its tags
+can be inserted into a dictionary data structure for convenient access.
+
+For this purpose, osm4j provides the
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.util.OsmModelUtil)
+helper class that offers a
+method `getTagsAsMap()` that can be used to retrieve an entity's tags
+as a `Map<String,String>`.
+
+The following example makes use of this method to count
+the number of restaurants, cafes and pubs within a bounding box:
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/CountingBusinesses.java",
+	part="main", linenumbers="false");
+
+$:markdown
+
+Here's the output:
+
+    restaurants: 11
+    cafes: 10
+    pubs: 4
+$:/

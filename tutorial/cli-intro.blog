@@ -1,0 +1,111 @@
+$:meta(title="Command line interface: osm4j-utils");
+$:markdown
+#Command line interface: osm4j-utils
+
+##Setup
+
+osm4j also contains a command line interface for performing data manipulation
+tasks.
+To get started, check out the
+[osm4j-utils repository](https://github.com/topobyte/osm4j-utils):
+
+    git clone git@github.com:topobyte/osm4j-utils.git
+
+After that, `cd` to the checked out repository (`cd osm4j-utils`) and build
+the project:
+
+    gradle createRuntime
+
+There are a number of executables in the `scripts` subdirectory. To run the
+tool `OsmCat`, just type
+
+    ./scripts/OsmCat
+
+Alternatively, you can also add the scripts directory to your `PATH`
+variable:
+
+    export PATH=$PATH:/path/to/osm4j-utils/scripts
+
+Afterwards you will be able to run the scripts directly.
+Make this permament, by adding it to your shell configuration.
+
+##Examples
+
+### Get some data
+
+Most operations are file based, so we will need some local data to work on:
+
+    wget -O berlin.pbf http://download.geofabrik.de/europe/germany/berlin-latest.osm.pbf
+
+### Basics: OsmCount and OsmCat
+
+Now you can use the `OsmCount` tool to count the number of elements
+in the file:
+
+    OsmCount -input-format pbf -input berlin.pbf
+
+Here's the output:
+
+    nodes:            4003479
+    ways:             612717
+    ways (closed):    468693
+    waynodes:         4848787
+    relations:        8296
+    relation members: 185542
+
+Most commands support an `input-format` argument to specify the file format
+(xml, pbf, tbo). The `input` argument usually tells the tools where to read
+data from. In many tools the `input` argument is optional and if not
+specified, it will read from standard input.
+
+Hence you can use Unix pipes to chain input and output. For example, the
+previous example can also be executed like this using the standard tool `cat`:
+
+    cat berlin.pbf | OsmCount -input-format pbf
+
+Similar to the `input` and `input-format` arguments, many tools support
+`output` and `output-format` arguments.
+
+For example this command will write the contents of the PBF file to
+another file in XML format:
+
+    OsmCat -input-format pbf -input berlin.pbf -output-format xml -output berlin.osm.xml
+
+The output file will be about one gigabyte of data, so you may want to skip
+the previous command.
+
+As with the `input` argument, the `output` argument is usually optional.
+If omitted, output will go to standard output, i.e. the console.
+
+Again we can combine this with Unix pipes. For example, to browse the PBF
+file in XML format using `less` use this:
+
+    OsmCat -input-format pbf -input berlin.pbf -output-format xml | less
+
+### Filtering data
+
+To filter data based on element tags you can use the `OsmTagFilter` command.
+For example, to extract all museums in Berlin and store them in an XML file,
+execute this:
+
+    OsmTagFilter -input-format pbf -input berlin.pbf -key tourism -value museum -output-format xml -output museums.osm.xml
+
+We could also use Unix pipes and stream redirection for input and output:
+
+    cat berlin.pbf | OsmTagFilter -input-format pbf -key tourism -value museum -output-format xml > museums.osm.xml
+
+Hence, commands can also easily be chained. If you just want to get some info
+about the number of museums, try this:
+
+    OsmTagFilter -input-format pbf -input berlin.pbf -key tourism -value museum -output-format pbf | OsmCount -input-format pbf
+
+The results:
+
+    nodes:            100
+    ways:             78
+    ways (closed):    78
+    waynodes:         1224
+    relations:        11
+    relation members: 51
+
+$:/

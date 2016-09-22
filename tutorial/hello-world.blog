@@ -1,0 +1,48 @@
+$:meta(title="Hello World");
+$:markdown
+# Hello World
+
+The following example downloads a sample dataset that contains
+the node that represents the Big Ben in London and prints out information about
+that node.
+Therefore, it opens a stream to retrieve the sample file from our server
+and creates an
+@javadocClass(de.topobyte:osm4j-xml:+:de.topobyte.osm4j.xml.dynsax.OsmXmlIterator)
+using the `InputStream` as constructor argument.
+
+We can then iterate through the elements using a for-each loop.
+The iterator returns
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.EntityContainer)s
+that wrap the actual objects.
+We check whether the object is a node using the `getType()` method and then retrieve
+the actual object using the `getEntity()` method and cast it to a
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmNode).
+
+Once we have the OsmNode, we can print its id and the coordinate.
+Using another for loop, we can also print each tag by retrieving the `i`-th tag
+using the `getTag(i)` method.
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/HelloWorld.java",
+	part="main", linenumbers="false");
+
+$:markdown
+
+Here's the output:
+
+    id: 1802652184
+    latitude: 51.5006617
+    longitude: -0.1245829
+    tags:
+    amenity = clock
+    display = analog
+    faces = 4
+    historic = technical_monument
+    name = Big Ben
+    support = tower
+    tourism = attraction
+    visibility = area
+    wikipedia = en:Big Ben
+$:/

@@ -1,0 +1,35 @@
+$:meta(title="Visualizing data: restaurant density");
+$:markdown
+# Visualizing data: restaurant density
+
+JTS offer more powerful spatial operations. For instance it is pretty easy
+to check wheter a point lies within a polygon because the Geometry class
+provides the `contains()` method for this.
+
+In this example, we're using this to visualize the density of restaurants
+for the boroughs of Berlin.
+First, we will load the geometries of all boroughs into memory and assemble
+their polygonal boundary. Then we will download all restaurant nodes in the
+area covered by the boroughs from Overpass and calculate the number of
+restaurants in each borough. After that we will determine a nice color
+depending on the density and print the results in GeoJSON.
+
+See the
+[results](https://github.com/topobyte/osm4j-examples/blob/master/output/berlin-restaurant-density.geojson)
+online, here's a preview:
+
+$:/
+
+$:image(src="images/boroughs-restaurants.png");
+
+$:markdown
+Here's the code:
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/geometry/RestaurantDensityBerlin.java",
+	part="main", linenumbers="false");
+
+$:markdown
+$:/

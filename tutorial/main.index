@@ -1,0 +1,17 @@
+# Preface
+  setup
+  data-model
+  hello-world
+# Basic usage
+  counting-elements
+  counting-businesses
+  writing-data
+# Using geometry
+  building-geometry
+  building-polygons-from-relations
+  using-polygon-operations
+  visualizing-restaurant-density
+  rendering-a-map
+# Command line interface
+  cli-intro
+  cli-reference

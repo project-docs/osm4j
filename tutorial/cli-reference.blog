@@ -1,0 +1,175 @@
+$:meta(title="Command line interface: reference");
+$:markdown
+#Command line interface: reference
+
+## OsmCount
+
+Reads an OSM input stream and counts some information about contained data.
+It will print information about the number of nodes, ways and relations
+contained, the number of closed ways, the total number of nodes referenced
+by ways and the total number of relation members.
+
+Example:
+
+    OsmCount -input-format pbf -input berlin.pbf
+
+## OsmCat
+
+Basic command that reads data in some input data format and outputs it in
+a specified output data format.
+
+Example:
+
+    OsmCat -input-format pbf -input berlin.pbf \
+        -output-format tbo -output berlin.tbo
+
+## OsmEntitySplit
+
+Reads an input file and redirects the different types of elements to
+separate files. The `output-*` arguments are all optional, so that you
+can select just the element types you need.
+
+Example:
+
+    OsmEntitySplit -input-format pbf -input berlin.pbf \
+        -output-format pbf \
+        -output-nodes berlin-nodes.pbf \
+        -output-ways berlin-ways.pbf \
+        -output-relations berlin-relations.pbf
+
+## OsmMerge
+
+Read from an arbitrary number of files and merges the elements of those
+files into a single valid output file.
+
+Example:
+
+    OsmMerge -input-format pbf -output-format pbf -output merged.pbf \
+        berlin-ways.pbf berlin-relations.pbf
+
+## OsmDropTags
+
+Removes tags from all elements.
+
+Example:
+
+    OsmDropTags -input-format pbf -input berlin-nodes.pbf \
+        -output-format pbf -output berlin-nodes-notags.pbf
+
+## OsmDropMetadata
+
+Removes metadata from all elements.
+
+Example:
+
+    OsmDropMetadata -input-format pbf -input berlin.pbf \
+        -output-format pbf -output berlin-nometa.pbf
+
+## OsmKeyFilter
+
+Only pass elements that have a tag with the specified key.
+
+Example:
+
+    OsmKeyFilter -input-format pbf -input berlin-nodes.pbf \
+        -key amenity \
+        -output-format pbf -output berlin-nodes-amenity.pbf
+
+## OsmTagFilter
+
+Only pass elements that have a specified tag.
+
+Example:
+
+    OsmTagFilter -input-format pbf -input berlin.pbf \
+        -key amenity -value restaurant \
+        -output-format pbf -output berlin-restaurants.pbf
+
+## OsmTagFilterRegex
+
+Only pass elements that have a tag that has the specified key and the
+corresponding value matches the Java style regular expression.
+
+Example:
+
+    OsmTagFilterRegex -input-format pbf -input berlin-nodes.pbf \
+        -key amenity -value "restaurant|cafe|pub" \
+        -output-format pbf -output berlin-rcp.pbf
+
+## OsmBboxFilter
+
+Extract a bounding box from a dataset. The `bbox` argument expects a
+boundingx box in format `lon1, lat1, lon2, lat2`. Optional argument
+`nodes-only` will tell the tool to only extract nodes. Otherwise it will
+extract all nodes in the bounding box and additionally all ways that
+reference any of the extracted nodes, plus all relations that reference any
+of the extracted nodes or ways.
+
+Example:
+
+    OsmBboxFilter -input-format pbf -input berlin.pbf \
+        -bbox "13.465661,52.504055,13.469817,52.506204" \
+        -output-format pbf -output berlin-bbox.pbf
+
+## OsmRegionFilter
+
+Extract a polygonal region from a dataset. The `region` argument expects a
+plain text file containing a WKT geometry.
+Like the BboxFilter, it supports the optional argument
+`nodes-only` to extract nodes only.
+
+Example:
+
+    OsmRegionFilter -input-format pbf -input berlin.pbf \
+        -region Mitte.wkt \
+        -output-format pbf -output berlin-mitte.pbf
+
+## OsmCollectRelations
+
+Extracts from a dataset all relations that are referenced by any relation
+from a different dataset.
+
+Example:
+
+    OsmCollectRelations -input-format pbf -input berlin-relations.pbf \
+        -references-format pbf -references berlin-bbox.pbf \
+        -output-format pbf -output berlin-bbox-relations-relations.pbf
+
+## OsmCollectWays
+
+Extracts from a dataset all ways that are referenced by any relation from a
+different dataset.
+
+Example:
+
+    OsmCollectWays -input-format pbf -input berlin-ways.pbf \
+        -references-format pbf -references berlin-bbox.pbf \
+        -output-format pbf -output berlin-bbox-relations-ways.pbf
+
+## OsmCollectNodes
+
+Extracts from a dataset all nodes that are referenced by any relation
+from a different dataset.
+
+Example:
+
+    OsmCollectNodes -input-format pbf -input berlin-nodes.pbf \
+        -references-format pbf -references berlin-bbox-relations-ways.pbf \
+        -output-format pbf -output berlin-bbox-waynodes.pbf
+
+## OsmFindMostRecentTimestamp
+
+Goes through all elements and finds the one with the most recent edit date.
+Prints the date found to the console in the end. Use the `verbose` switch
+to get live results during data reading and print the currently most recent
+time found so far, which is useful for large datasets.
+
+Example:
+
+    OsmFindMostRecentTimestamp -input-format pbf -input berlin.pbf
+
+Output:
+
+    2015-10-20 22:40:55
+
+$:/

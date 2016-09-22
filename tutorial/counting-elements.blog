@@ -1,0 +1,58 @@
+$:meta(title="Iterators and readers: counting elements");
+$:markdown
+# Iterators and readers: counting elements
+
+In this example we will retrieve some data from the Overpass API
+using a bounding box query.
+We then iterate all objects in the returned dataset and count the
+number of nodes, ways and relations we encounter:
+
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/CountingElements.java",
+	part="main", linenumbers="false");
+
+$:markdown
+
+Here's the output:
+
+    nodes: 898
+    ways: 71
+    relations: 20
+$:/
+
+$:markdown
+
+The @javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmIterator)
+extends the standard `java.util.Iterator`, hence you can also replace the for loop with a
+while loop if you prefer this style:
+
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/CountingElements2.java",
+	start="55", end="66", linenumbers="false");
+
+$:markdown
+
+## Using a reader instead of an iterator
+
+The previous examples used the iterator pattern for accessing our data.
+As an alternative, osm4j provides
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmReader)
+implementations for all data formats to support callback driven programming out of the box:
+
+Here's a reimplementation of the element counter using callbacks. We define a `Counter` class
+that extends the
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.DefaultOsmHandler)
+so that it can be passed to the `reader` using the `setHandler()` method:
+
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/CountingElements3.java",
+	start="40", end="92", linenumbers="false");

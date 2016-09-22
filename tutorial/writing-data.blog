@@ -1,0 +1,53 @@
+$:meta(title="Writing data: OsmOutputStreams");
+$:markdown
+# Writing data: OsmOutputStreams
+
+There's not only an API for reading data, but also for writing.
+The core interface for writing data is the
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmOutputStream)
+You can feed OsmEntity instances to it and they will be written to a
+regular OutputStream or File in the chosen file format.
+
+There are currently three major file format implementations available
+and each provides an OsmOutputStream implementation:
+
+* @javadocClass(de.topobyte:osm4j-xml:+:de.topobyte.osm4j.xml.output.OsmXmlOutputStream)
+* @javadocClass(de.topobyte:osm4j-pbf:+:de.topobyte.osm4j.pbf.seq.PbfWriter)
+* @javadocClass(de.topobyte:osm4j-tbo:+:de.topobyte.osm4j.tbo.access.TboWriter)
+
+The following example will download some XML data contained in a
+bounding box from the Overpass API and store it in a PBF file on disk.
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/OverpassToPbf.java",
+	part="main", linenumbers="false");
+
+$:markdown
+You just create a
+@javadocClass(de.topobyte:osm4j-pbf:+:de.topobyte.osm4j.pbf.seq.PbfWriter)
+instance and then call the `write()` method for all objects you would like
+to write to the file.
+
+It is important, that you call `complete()` on the OsmOutputStream when you're
+done, so that the underlying implementation may finish the output operation.
+This makes sure, all data is written to the output completely.
+
+Depending on the output you have passed to the PbfWriter at construction, it
+may also be necessary to call another method to ensure all data is written.
+In the example, we're using an output stream and we call `close()` to make
+sure everything is written to disk.
+
+## From PBF to XML
+
+Of course, the reverse is also possible: reading from PBF and writing XML.
+Assuming that you have run the previous example, the following code will
+open the PBF file generated previously and write it as XML to the console.
+
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/PbfToXml.java",
+	part="main", linenumbers="false");

@@ -1,0 +1,66 @@
+$:meta(title="Applying geometric operations to polygons");
+$:markdown
+# Applying geometric operations to polygons
+
+Being able to convert OpenStreetMap elements to JTS geometries allows us
+to perform a lot of interesting geometric operations on them.
+
+For example, here is the the borough 'Mitte' of Berlin:
+
+$:/
+
+$:image(src="images/multipolygon2.png");
+
+$:markdown
+It can be built using the following code.
+The output is available
+[here](https://github.com/topobyte/osm4j-examples/blob/master/output/relation-16566.geojson).
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/geometry/BuildPolygon2.java",
+	part="main", linenumbers="false");
+
+$:markdown
+## Buffers
+As a subclass of Geometry, the MultiPolygon implements the `buffer()`
+operation that produces an enlarged version of the polygon. As argument the
+operation accepts a distance that specifies how much larger the result will
+be.
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/geometry/PolygonBufferPositive.java",
+	start="c::Build the", end="lc::println", linenumbers="false");
+
+$:image(src="images/buffer1.png");
+
+$:markdown
+The above example used a positive distance for the `buffer()` operation.
+It is however also possible to supply negative values, producing a polygon
+that is smaller than the input.
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/geometry/PolygonBufferNegative.java",
+	start="c::Build the", end="lc::println", linenumbers="false");
+
+$:image(src="images/buffer2.png");
+
+$:markdown
+## Set operations
+The Geometry class offers more operations, most notably the set operations:
+intersection, union, difference and symmetric difference.
+For example we can subtract the original polygon from its buffer using the
+difference operation:
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/geometry/PolygonBufferDifference.java",
+	start="c::Build the", end="lc::println", linenumbers="false");
+
+$:image(src="images/buffer3.png");

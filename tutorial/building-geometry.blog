@@ -1,0 +1,90 @@
+$:meta(title="How to build geometry");
+$:markdown
+# How to build geometry
+
+osm4j can build
+@javadocClass(com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Geometry)
+objects from OpenStreetMap elements.
+Specifically,
+@javadocClass[OsmNodes](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmNode),
+can be converted to
+@javadocClass[Coordinates](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Coordinate)
+and
+@javadocClass[Points](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Point)
+@javadocClass[OsmWays](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmWay),
+can be converted to
+@javadocClass[LineStrings](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.LineString)
+and
+@javadocClass[OsmRelations](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmRelation),
+can be converted to
+@javadocClass[MultiPolygons](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.MultiPolygon)
+Since closed ways may represent
+@javadocClass[Polygons](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Polygon)
+it is also easily possible to create a `Polygon` from the built `LineString`.
+
+The core class for building `Geometry` from OSM elements is the
+@javadocClass(de.topobyte:osm4j-geometry:+:de.topobyte.osm4j.geometry.GeometryBuilder),
+which provides static methods for the mentioned conversions.
+For example, to build a `Point` from an `OsmNode`, use the `build(OsmNode)` method.
+
+As mentioned earlier, OSM ways and relations do not contain their geometric
+coordinates directly &ndash; they just contain id references to other objects.
+Hence we need a means to resolve these references if we want to build the
+geometry of ways and relations. OSM data is used in many different setups
+and there are multiple ways of resolving these references that may be
+appropriate in yours.
+
+To allow for different mechanisms of resolving referenced entities, osm4j
+defines the
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.resolve.OsmEntityProvider),
+interface that has methods for retrieving the basic elements based on their
+`id`. Here's that interface's definition:
+$:/
+
+$:javainline(linenumbers="false")
+public interface OsmEntityProvider
+{
+
+	public OsmNode getNode(long id) throws EntityNotFoundException;
+
+	public OsmWay getWay(long id) throws EntityNotFoundException;
+
+	public OsmRelation getRelation(long id) throws EntityNotFoundException;
+
+}
+$:/
+
+$:markdown
+When building the geometry of a way or relation using the `GeometryBuilder`,
+you need to pass an implementation of this interface along with the `OsmEntity`
+you want to build. The `GeometryBuilder` will query your provider for the
+objects it needs to build the geometry.
+
+In the simplest form, an `EntityProvider` is implemented in memory.
+osm4j provides such a provider, the
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.dataset.InMemoryListDataSet)
+that can be obtained from an `OsmIterator` or `OsmReader` using the
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.dataset.ListDataSetLoader).
+To reduce the size of this dataset in memory, the `ListDataSetLoader` can
+be configured not to store node tags for example, which are not necessary to
+build the geometry of ways and relations.
+
+The `InMemoryListDataSet` is fine for situations, where the relevant data fits
+into main memory. When this is not the case, you need to use a different
+provider.
+Depending on your setup, this could be an `EntityProvider` implementation
+backed by a database, a key value store, or even by network calls to some
+API.
+
+Note that the three methods of the interface may throw an
+`EntityNotFoundException` if a requested element can not be found by the
+provider. This happens with the `InMemoryListDataSet` if the requested element
+was not contained in the dataset it has been built from.
+Since the `GeometryBuilder` uses these methods extensively, its methods
+may throw these exceptions as well. So, when building a geometry, catch
+these exceptions and deal with them appropriately (for example when
+rendering a map, it may be appropriate to just ignore the element that
+cannot be built).
+
+The following examples will deal with datasets that fit into memory easily.
+$:/

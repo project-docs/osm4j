@@ -1,0 +1,89 @@
+$:meta(title="Setup your project");
+$:markdown
+# Setup your project
+
+Although you can setup your project by including our JAR files
+and their dependencies directly into your project, we recommend
+using Maven or Gradle.
+
+## Gradle
+
+### Existing project
+
+If you want to start using osm4j in an existing project, you will
+need to add it as a dependency.
+All packages are available through a public Maven repository.
+Add the following repository to your `build.gradle` file:
+
+    http://mvn.topobyte.de
+
+It contains the following artifacts that you can add as dependencies:
+
+    compile 'de.topobyte:osm4j-core:0.0.18'
+    compile 'de.topobyte:osm4j-utils:0.0.22'
+    compile 'de.topobyte:osm4j-xml:0.0.3'
+    compile 'de.topobyte:osm4j-pbf:0.0.7'
+    compile 'de.topobyte:osm4j-tbo:0.0.9'
+    compile 'de.topobyte:osm4j-geometry:0.0.14'
+
+### New project
+
+If you're starting a new project, you can use this `build.gradle` file
+to get started:
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven'
+
+    repositories {
+        maven {
+            url 'http://mvn.topobyte.de'
+        }
+        mavenCentral()
+    }
+
+    dependencies {
+        compile 'de.topobyte:osm4j-xml:0.0.3'
+        compile 'de.topobyte:osm4j-pbf:0.0.7'
+        compile 'de.topobyte:osm4j-tbo:0.0.9'
+        compile 'de.topobyte:osm4j-geometry:0.0.14'
+
+        compile 'de.topobyte:adt-geo:0.0.2'
+        compile 'de.topobyte:jts2awt:0.0.1'
+        compile 'de.topobyte:mercator-image:0.0.1'
+
+        compile 'org.wololo:jts2geojson:0.6.0'
+        compile 'org.apache.commons:commons-compress:1.8'
+
+        compile 'org.slf4j:slf4j-api:1.6.1'
+        runtime 'org.slf4j:slf4j-log4j12:1.6.1'
+        runtime 'log4j:log4j:1.2.16'
+    }
+
+If you want to change the name of your new project you can create
+a `settings.gradle` file with this content:
+
+    rootProject.name = 'hello-osm4j'
+
+You should create those two files in a new directory that serves as
+the root of your project. In addition you will need to create a directory
+tree `src/main/java` for your source code. On Linux just execute:
+
+    mkdir -p src/main/java
+
+Now you can create an Eclipse project if you like by executing:
+
+    gradle cleanEclipse eclipse
+
+The project can then be imported into Eclipse using the `File` menu by
+selecting `Import` -> `General` -> `Existing Projects into Workspace`.
+
+### Examples project
+
+Alternatively you can also clone our
+[examples project](https://github.com/topobyte/osm4j-examples)
+from Github.
+
+    git clone git@github.com:topobyte/osm4j-examples.git
+
+$:/

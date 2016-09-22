@@ -1,0 +1,23 @@
+$:meta(title="Rendering a map");
+$:markdown
+# Rendering a map
+
+In this example we will render a map to a Swing panel.
+This is how the result will look like:
+$:/
+
+$:image(src="images/map.png");
+
+$:markdown
+To build the map, we retrieve some data from the Overpass API
+using a bounding box query and read the data into memory.
+We will then select the features we would like to
+appear on the map and assemble their geometries. Whenever the panel's
+`paintComponent()` method is invoked, we render the objects onto the
+panel's canvas.
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/tutorial/MapRendering.java",
+	start="72", end="399", linenumbers="false");

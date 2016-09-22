@@ -47,7 +47,7 @@ Please report issues there.
 <a name="documentation"></a>
 ## Documentation
 
-To learn how to use osm4j have a look a the [Tutorial](../../tutorials/osm4j/index.html).
+To learn how to use osm4j have a look a the [Tutorial](tutorial/index.html).
 
 There is a [collection of examples](https://github.com/topobyte/osm4j-examples)
 on GitHub that includes the code used in the tutorial and more.

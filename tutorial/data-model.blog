@@ -1,0 +1,111 @@
+$:meta(title="Data model");
+$:markdown
+# Data model
+## OpenStreetMap data
+
+All data in OpenStreetMap is stored in three fundamental data types,
+also called elements:
+**nodes**, **ways** and **relations**. These data types are used to
+describe objects that exist in the world. The different elements differ
+in their capability to model real world objects. For example a *node* can
+be used to model the location of a restaurant
+while a *way*, as a sequence of coordinates, can represent the path of
+a street.
+
+In addition to their geometric component, elements contain data that
+describes the meaning of their geometry. To this purpose, any element
+can have **tags** to model properties of the object it represents.
+Technically, a *tag* is just a pair of strings, a *key* and a *value*,
+that assigns a value to some property of an object.
+
+Data objects share more common traits: every object has an **id**,
+a number that identifies it uniquely within the set of objects of the same
+basic data type. Also, every object has some associated **metadata** that
+describes information such as the time the object has been modified the
+last time and the username who modified the object.
+
+For more information read about
+[Elements](http://wiki.openstreetmap.org/wiki/Elements)
+and
+[Tags](http://wiki.openstreetmap.org/wiki/Tags)
+on the official wiki.
+
+## osm4j data model
+
+osm4j provides abstract data types for the basic OpenStreetMap elements.
+The core interfaces are
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmNode),
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmWay) and
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmRelation).
+All three extend the interface
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmEntity),
+which offers access to the common properties of the elementary data types:
+
+* `getId()` returns the unique identifier of an object.
+* `getMetadata()` retrieves the
+  @javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmMetadata),
+  that is associated with an object.
+* `getNumberOfTags()` and `getTag(int index)` give access to the tags which are represented by the
+  @javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmTag)
+  interface.
+
+### Nodes
+
+An
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmNode)
+has the methods `getLatitude()` and `getLongitude()` to retrieve the coordinates of the point
+it represents.
+
+### Ways
+
+An
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmWay)
+references a sequence of nodes. It provides access to them through methods `getNumberOfNodes()`
+and `getNodeId(int n)`.
+
+### Relations
+
+An
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmRelation)
+references a sequence of other objects as members.
+It provides access to them through methods `getNumberOfMembers()`
+and `getMember(int n)`. Every member is of type
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmRelationMember)
+and encapsulates three properties of the referenced object: its *identifier*,
+its *type* (node, way or relation) and its *role*.
+
+
+## Data sets
+
+An OSM dataset is basically a long list of nodes, ways and relations
+that is encoded using one of the
+basic [storage file formats](http://wiki.openstreetmap.org/wiki/OSM_file_formats).
+osm4j provides access to data encoded in the most important of these
+data formats by providing
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmReader)
+and
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmIterator)
+implementations for them.
+
+All basic data formats have in common, that they store their data in a specific
+order:
+
+* They contain a sequence of nodes, followed by a sequence of ways,
+  followed by a sequence of relations.
+* Each sequence contains its elements ordered by the objects' ids in ascending order.
+
+Thus, when processing an OpenStreetMap dataset, you will encounter the contained data
+in exactly this order. Also, when writing a dataset to some output using an
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmOutputStream)
+it is important to feed the elements to the stream in the correct order.
+
+It is important to understand that ways and relations reference other objects using
+their ids. They do not contain the data of referenced objects themselves. Hence, to
+work with a way or relation it is usually necessary to resolve those references and
+find the actual objects they reference.
+
+For example, a way is just a sequence of node ids. To interpret the geometry of the way,
+you have to assemble a sequence of coordinates from the references by finding the
+referenced nodes by their id.
+
+$:/
