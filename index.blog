@@ -1,0 +1,183 @@
+$:markdown
+# osm4j
+
+osm4j is a Java library for working with
+[OpenStreetMap](http://www.openstreetmap.org) data.
+Our first attempts of using OSM data on the Java platform were
+based on [Osmosis](http://wiki.openstreetmap.org/wiki/Osmosis).
+The callback-driven style of programming didn't feel very comfortable
+however, so that we decided to write our own abstraction layer.
+
+Our library provides abstract data types for representing OSM data
+and iterative input and output handlers for various common file formats.
+In addition, callback-based handlers are also available so that programs
+written in this style can easily be ported.
+
+It also provides support for processing and manipulating the geometry of
+OSM objects by providing bindings to the data structures from
+[JTS](http://tsusiatsoftware.net/jts/main.html).
+
+## Table of contents
+* [License](#license)
+* [Source code](#source-code)
+* [Documentation](#documentation)
+* [Package overview](#overview)
+<!--    * [osm4j-core](#osm4j-core)-->
+<!--    * [osm4j-xml](#osm4j-xml)-->
+<!--    * [osm4j-pbf](#osm4j-pbf)-->
+<!--    * [osm4j-tbo](#osm4j-tbo)-->
+<!--    * [osm4j-geometry](#osm4j-geometry)-->
+<!--    * [osm4j-util](#osm4j-util)-->
+* [Installation](#installation)
+* [Basic usage](#basic-usage)
+
+<a name="license"></a>
+## License
+
+osm4j is released under the terms of the
+[GNU Lesser General Public License
+version 3 (GNU LGPLv3)](http://www.gnu.org/licenses/lgpl-3.0.html).
+
+<a name="source-code"></a>
+## Source code
+
+The source code is available on [our GitHub page](https://github.com/topobyte).
+Please report issues there.
+
+<a name="documentation"></a>
+## Documentation
+
+To learn how to use osm4j have a look a the [Tutorial](../../tutorials/osm4j/index.html).
+
+There is a [collection of examples](https://github.com/topobyte/osm4j-examples)
+on GitHub that includes the code used in the tutorial and more.
+
+There is also Javadoc available for all artifacts:
+@javadocIndex[osm4j-core](de.topobyte:osm4j-core:+),
+@javadocIndex[osm4j-xml](de.topobyte:osm4j-xml:+),
+@javadocIndex[osm4j-pbf](de.topobyte:osm4j-pbf:+),
+@javadocIndex[osm4j-tbo](de.topobyte:osm4j-tbo:+),
+@javadocIndex[osm4j-geometry](de.topobyte:osm4j-geometry:+),
+@javadocIndex[osm4j-utils](de.topobyte:osm4j-utils:+),
+@javadocIndex[osm4j-extra](de.topobyte:osm4j-extra:+)
+
+<a name="overview"></a>
+## Package overview
+
+The library consists of a few modules that package related functionality, so
+that you can easily select just those components that you need:
+
+* osm4j-core
+* osm4j-xml
+* osm4j-pbf
+* osm4j-tbo
+* osm4j-geometry
+* osm4j-utils
+
+<a name="osm4j-core"></a>
+### osm4j-core
+
+osm4j provides the basic interfaces and data types for representing
+[objects from the OpenStreetMap](http://wiki.openstreetmap.org/wiki/Elements).
+Additionally, it provides common interfaces and
+data handlers for reading OSM data as well as some useful utility methods
+that make some basics operations on the data easy to accomplish.
+
+<a name="osm4j-xml"></a>
+### osm4j-xml
+
+osm4j-xml contains input and output methods for the
+[basic XML representation of OSM data](http://wiki.openstreetmap.org/wiki/OSM_XML).
+By using a third party compression library such as
+[Apache Commons Compress](https://commons.apache.org/proper/commons-compress/),
+for filtering input and output streams, it can also be used to process
+gzip or bzip2 compressed data.
+
+<a name="osm4j-pbf"></a>
+### osm4j-pbf
+
+osm4j-pbf provides the tools for working with the very widely used
+[PBF file format](http://wiki.openstreetmap.org/wiki/PBF_Format)
+for OSM data that is based on Google's Protocol Buffers.
+
+<a name="osm4j-tbo"></a>
+### osm4j-tbo
+
+osm4j-tbo can be used to read and write our own binary OSM file format.
+The file format is very similar to PBF, but is not based on Protocol Buffers.
+It has been designed to offer similar compression while offering enhanced
+access methods and to allow for improved I/O performance.
+
+<a name="osm4j-geometry"></a>
+### osm4j-geometry
+
+osm4j-geometry is a package for making it easy to perform geometric
+operations with OpenStreetMap data. It contains utilities for converting
+the basic types of elements defined in the OSM data model to their geoemtric
+representations. It uses the
+[JTS Topology Suite](http://tsusiatsoftware.net/jts/main.html)
+to represent geometric objects, which allows you to apply a number of typical
+GIS operations to your data.
+
+* OSM nodes can be converted to JTS `Coordinate`s or `Point`s
+* OSM ways can be converted to JTS `LineString`s, `LinearRing`s or `Polygon`s
+* OSM relations can be converted to JTS `MultiPolygon`s
+
+<a name="osm4j-utils"></a>
+### osm4j-utils
+
+osm4j-utils is a collection of command line tools for performing recurring
+tasks on OSM data such as conversion between different file formats.
+It also provides some tools for data analyis.
+
+The classes of this package can also be used as helpful utilities
+when implementing custom data manipulation tasks.
+
+<a name="installation"></a>
+## Installation
+
+### Maven / Gradle
+
+All packages are available through a public Maven repository.
+Add the following repository to your `build.gradle` file:
+
+    http://mvn.topobyte.de
+
+It contains the following artifacts that you can add as dependencies:
+
+    compile 'de.topobyte:osm4j-core:0.0.15'
+    compile 'de.topobyte:osm4j-utils:0.0.20'
+    compile 'de.topobyte:osm4j-xml:0.0.3'
+    compile 'de.topobyte:osm4j-pbf:0.0.5'
+    compile 'de.topobyte:osm4j-tbo:0.0.9'
+    compile 'de.topobyte:osm4j-geometry:0.0.10'
+
+<a name="basic-usage"></a>
+## Basic usage
+
+This snippet shows basic usage of the library:
+
+$:/
+
+$:github(
+	lang = "java", repo = "topobyte/osm4j-examples",
+	file="src/main/java/de/topobyte/osm4j/examples/ListRestaurantsFromOverpassInBoundingBox.java",
+	part="main", linenumbers="false");
+
+$:markdown
+
+Output:
+
+    Salt & Pepper: 52.505004, 13.468952
+    Rancho Grande: 52.505088, 13.469047
+    Sonntag: 52.505548, 13.466235
+    Pho' House: 52.504662, 13.468620
+    Imaki Sushi: 52.504752, 13.468703
+    Transit: 52.505967, 13.465723
+    VIETBOWL: 52.505787, 13.466867
+    Caminetto: 52.505206, 13.467177
+    Hot 'n' Spicy Food: 52.504850, 13.467597
+    Glory Duck: 52.505631, 13.466148
+    Bettenhaus: 52.505474, 13.466318
+
+$:/
