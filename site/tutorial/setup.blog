@@ -19,12 +19,12 @@ Add the following repository to your `build.gradle` file:
 
 It contains the following artifacts that you can add as dependencies:
 
-    compile 'de.topobyte:osm4j-core:0.0.18'
-    compile 'de.topobyte:osm4j-utils:0.0.22'
-    compile 'de.topobyte:osm4j-xml:0.0.3'
-    compile 'de.topobyte:osm4j-pbf:0.0.7'
-    compile 'de.topobyte:osm4j-tbo:0.0.9'
-    compile 'de.topobyte:osm4j-geometry:0.0.14'
+    compile 'de.topobyte:osm4j-core:0.0.20'
+    compile 'de.topobyte:osm4j-utils:0.0.23'
+    compile 'de.topobyte:osm4j-xml:0.0.5'
+    compile 'de.topobyte:osm4j-pbf:0.0.9'
+    compile 'de.topobyte:osm4j-tbo:0.0.10'
+    compile 'de.topobyte:osm4j-geometry:0.0.15'
 
 ### New project
 
@@ -43,14 +43,14 @@ to get started:
     }
 
     dependencies {
-        compile 'de.topobyte:osm4j-xml:0.0.3'
-        compile 'de.topobyte:osm4j-pbf:0.0.7'
-        compile 'de.topobyte:osm4j-tbo:0.0.9'
-        compile 'de.topobyte:osm4j-geometry:0.0.14'
+        compile 'de.topobyte:osm4j-xml:0.0.5'
+        compile 'de.topobyte:osm4j-pbf:0.0.9'
+        compile 'de.topobyte:osm4j-tbo:0.0.10'
+        compile 'de.topobyte:osm4j-geometry:0.0.15'
 
         compile 'de.topobyte:adt-geo:0.0.2'
         compile 'de.topobyte:jts2awt:0.0.1'
-        compile 'de.topobyte:mercator-image:0.0.1'
+        compile 'de.topobyte:mercator-image:0.0.2'
 
         compile 'org.wololo:jts2geojson:0.6.0'
         compile 'org.apache.commons:commons-compress:1.8'
