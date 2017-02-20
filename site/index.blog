@@ -15,7 +15,7 @@ written in this style can easily be ported.
 
 It also provides support for processing and manipulating the geometry of
 OSM objects by providing bindings to the data structures from
-[JTS](http://tsusiatsoftware.net/jts/main.html).
+[JTS](https://www.locationtech.org/projects/technology.jts).
 
 ## Table of contents
 * [License](#license)
@@ -124,7 +124,7 @@ osm4j-geometry is a package for making it easy to perform geometric
 operations with OpenStreetMap data. It contains utilities for converting
 the basic types of elements defined in the OSM data model to their geoemtric
 representations. It uses the
-[JTS Topology Suite](http://tsusiatsoftware.net/jts/main.html)
+[JTS Topology Suite](https://www.locationtech.org/projects/technology.jts)
 to represent geometric objects, which allows you to apply a number of typical
 GIS operations to your data.
 
