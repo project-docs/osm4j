@@ -70,6 +70,11 @@ There is also Javadoc available for all artifacts:
 @javadocIndex[osm4j-utils](de.topobyte:osm4j-utils:+),
 @javadocIndex[osm4j-extra](de.topobyte:osm4j-extra:+)
 
+There is also a page about [osm4j on the OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/Osm4j).
+
+Should you have any questions, get in touch using the
+[Mailing List](https://lists.openstreetmap.org/listinfo/osm4j)
+
 <a name="overview"></a>
 ## Package overview
 
