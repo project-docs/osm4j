@@ -6,16 +6,16 @@ osm4j can build
 @javadocClass(com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Geometry)
 objects from OpenStreetMap elements.
 Specifically,
-@javadocClass[OsmNodes](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmNode),
+@javadocClass[OsmNodes](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmNode)
 can be converted to
 @javadocClass[Coordinates](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Coordinate)
 and
-@javadocClass[Points](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Point)
-@javadocClass[OsmWays](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmWay),
+@javadocClass[Points](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Point),
+@javadocClass[OsmWays](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmWay)
 can be converted to
 @javadocClass[LineStrings](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.LineString)
 and
-@javadocClass[OsmRelations](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmRelation),
+@javadocClass[OsmRelations](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmRelation)
 can be converted to
 @javadocClass[MultiPolygons](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.MultiPolygon)
 Since closed ways may represent
