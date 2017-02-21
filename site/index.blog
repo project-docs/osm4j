@@ -162,7 +162,7 @@ It contains the following artifacts that you can add as dependencies:
     compile 'de.topobyte:osm4j-core:0.0.20'
     compile 'de.topobyte:osm4j-utils:0.0.23'
     compile 'de.topobyte:osm4j-xml:0.0.5'
-    compile 'de.topobyte:osm4j-pbf:0.0.9'
+    compile 'de.topobyte:osm4j-pbf:0.0.10'
     compile 'de.topobyte:osm4j-tbo:0.0.10'
     compile 'de.topobyte:osm4j-geometry:0.0.15'
 
