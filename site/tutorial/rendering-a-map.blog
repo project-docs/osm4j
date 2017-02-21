@@ -20,4 +20,4 @@ $:/
 $:github(
 	lang = "java", repo = "topobyte/osm4j-examples",
 	file="src/main/java/de/topobyte/osm4j/examples/tutorial/MapRendering.java",
-	start="75", end="399", linenumbers="false");
+	start="77", end="395", linenumbers="false");
