@@ -148,8 +148,8 @@ Example:
 
 ## OsmCollectNodes
 
-Extracts from a dataset all nodes that are referenced by any relation
-from a different dataset.
+Extracts from a dataset all nodes that are referenced by any
+way or relation from a different dataset.
 
 Example:
 
