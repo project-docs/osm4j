@@ -34,7 +34,7 @@ $:/
 $:github(
 	lang = "java", repo = "topobyte/osm4j-examples",
 	file="src/main/java/de/topobyte/osm4j/examples/tutorial/CountingElements2.java",
-	start="55", end="66", linenumbers="false");
+	start="51", end="60", linenumbers="false");
 
 $:markdown
 
@@ -55,4 +55,4 @@ $:/
 $:github(
 	lang = "java", repo = "topobyte/osm4j-examples",
 	file="src/main/java/de/topobyte/osm4j/examples/tutorial/CountingElements3.java",
-	start="40", end="92", linenumbers="false");
+	start="35", end="85", linenumbers="false");
