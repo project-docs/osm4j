@@ -17,7 +17,7 @@ can be converted to
 and
 @javadocClass[OsmRelations](de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.model.iface.OsmRelation)
 can be converted to
-@javadocClass[MultiPolygons](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.MultiPolygon)
+@javadocClass[MultiPolygons](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.MultiPolygon).
 Since closed ways may represent
 @javadocClass[Polygons](com.vividsolutions:jts:+:com.vividsolutions.jts.geom.Polygon)
 it is also easily possible to create a `Polygon` from the built `LineString`.
@@ -36,7 +36,7 @@ appropriate in yours.
 
 To allow for different mechanisms of resolving referenced entities, osm4j
 defines the
-@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.resolve.OsmEntityProvider),
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.resolve.OsmEntityProvider)
 interface that has methods for retrieving the basic elements based on their
 `id`. Here's that interface's definition:
 $:/
