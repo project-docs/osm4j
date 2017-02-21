@@ -4,7 +4,7 @@ $:markdown
 
 There's not only an API for reading data, but also for writing.
 The core interface for writing data is the
-@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmOutputStream)
+@javadocClass(de.topobyte:osm4j-core:+:de.topobyte.osm4j.core.access.OsmOutputStream).
 You can feed OsmEntity instances to it and they will be written to a
 regular OutputStream or File in the chosen file format.
 
