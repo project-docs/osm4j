@@ -22,12 +22,6 @@ OSM objects by providing bindings to the data structures from
 * [Source code](#source-code)
 * [Documentation](#documentation)
 * [Package overview](#overview)
-<!--    * [osm4j-core](#osm4j-core)-->
-<!--    * [osm4j-xml](#osm4j-xml)-->
-<!--    * [osm4j-pbf](#osm4j-pbf)-->
-<!--    * [osm4j-tbo](#osm4j-tbo)-->
-<!--    * [osm4j-geometry](#osm4j-geometry)-->
-<!--    * [osm4j-util](#osm4j-util)-->
 * [Installation](#installation)
 * [Basic usage](#basic-usage)
 
