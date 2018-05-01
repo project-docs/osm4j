@@ -1,8 +1,8 @@
 $:meta(title="Command line interface: osm4j-utils");
 $:markdown
-#Command line interface: osm4j-utils
+# Command line interface: osm4j-utils
 
-##Setup
+## Setup
 
 osm4j also contains a command line interface for performing data manipulation
 tasks.
@@ -29,7 +29,7 @@ variable:
 Afterwards you will be able to run the scripts directly.
 Make this permament, by adding it to your shell configuration.
 
-##Examples
+## Examples
 
 ### Get some data
 
