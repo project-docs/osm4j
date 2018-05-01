@@ -13,9 +13,10 @@ using Maven or Gradle.
 If you want to start using osm4j in an existing project, you will
 need to add it as a dependency.
 All packages are available through a public Maven repository.
-Add the following repository to your `build.gradle` file:
+Add the following repositories to your `build.gradle` file:
 
     http://mvn.topobyte.de
+    http://mvn.slimjars.com
 
 It contains the following artifacts that you can add as dependencies:
 
@@ -38,6 +39,9 @@ to get started:
     repositories {
         maven {
             url 'http://mvn.topobyte.de'
+        }
+        maven {
+            url 'http://mvn.slimjars.com'
         }
         mavenCentral()
     }
