@@ -147,9 +147,10 @@ when implementing custom data manipulation tasks.
 ### Maven / Gradle
 
 All packages are available through a public Maven repository.
-Add the following repository to your `build.gradle` file:
+Add the following repositories to your `build.gradle` file:
 
     http://mvn.topobyte.de
+    http://mvn.slimjars.com
 
 It contains the following artifacts that you can add as dependencies:
 
